@@ -1,0 +1,20 @@
+{
+    "name": "multiplayer_snake",
+    "version": "1.0.0",
+    "description": "A multiplayer snake game",
+    "main": "node server.js",
+    "scripts": {
+        "start": "node backend/server.js",
+        "dev": "nodemon backend/server.js"
+    },
+    "author": "Sebastian Velasco",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "socket.io": "^2.3.0",
+        "yarn": "^1.22.10"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.6"
+    }
+}
