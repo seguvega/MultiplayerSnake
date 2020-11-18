@@ -8,6 +8,10 @@
         #gameScreen {
             display: none;
         }
+        
+        body {
+            overflow: hidden;
+        }
     </style>
 
 </head>
@@ -98,14 +102,12 @@
 
         canvas = document.getElementById("canvas");
         ctx = canvas.getContext("2d");
-        canvas.style.overflow = "hidden" ///Para quitar los scrolls al canvas
         canvas.width = canvas.height = 2000;
-
         ctx.fillStyle = bg_color;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.lineWidth = 10;
         ctx.strokeStyle = snake_color.color1;
-        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeRect(0, 0, canvas.width, canvas.height); //se borra el margen cuando se mueve la camara
 
         gameActive = true; //Variable inicia y finaliza el juego en la parte del cliente
         document.addEventListener("keydown", keydown);
@@ -140,9 +142,6 @@
             canvas.style.marginLeft = centerXP2;
             canvas.style.marginTop = centerYP2;
         }
-        /*
-        console.log(centerX);
-        console.log(centerY);*/
         paintPlayer(state.players[0], size, snake_color.color1);
         paintPlayer(state.players[1], size, snake_color.color2);
     }
