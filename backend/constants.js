@@ -1,5 +1,5 @@
-const frameRate = 10;
-const gridSize = 20;
+const frameRate = 5;
+const gridSize = 40;
 
 module.exports = {
     frameRate,

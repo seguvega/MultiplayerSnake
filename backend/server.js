@@ -27,16 +27,17 @@ io.on('connection', client => {
     client.on('joinGame', handleJoinGame);
 
     function handleJoinGame(gameCode) {
-        const room = io.sockets.adapter.rooms[gameCode];
+        const room = io.sockets.adapter.rooms[gameCode]; //Busca si la id de la sala existe
         let allUsers;
 
         if (room) {
-            allUsers = room.sockets;
+            allUsers = room.sockets; //Los jugadores de esa sala
+            // console.log("allUsers", allUsers);
         }
         let numClient = 0;
 
         if (allUsers) {
-            numClient = Object.keys(allUsers).length;
+            numClient = Object.keys(allUsers).length; //Si saca el numero de jugadores ya que si hay 2 jugadores .length = 2
         }
 
         if (numClient == 0) {
@@ -69,9 +70,8 @@ io.on('connection', client => {
 
     function handleKeyDown(keyCode) {
         const roomName = clientRooms[client.id];
-        console.log("Clientes y sus Salas", clientRooms); //objeto
+        //console.log("Clientes y sus Salas", clientRooms); //objeto
         if (!roomName) {
-            console.log("1");
             return;
         }
 
@@ -93,7 +93,7 @@ io.on('connection', client => {
 function startGameInterval(roomName) {
     const intervalId = setInterval(() => {
         const winner = gameLoop(state[roomName])
-        console.log('State', state); //Objeto state
+            //console.log('State', state); //Objeto state
         if (!winner) {
             emitGameState(roomName, state[roomName]);
         } else {
@@ -101,6 +101,7 @@ function startGameInterval(roomName) {
             //state[roomName] = null;
             delete state.roomName;
             //Se eliminar del objeto clientRooms{id_cliente: sala} para que no entren al Handlekeydown
+            //Este se elimina ya que jugadores tiene un array de todos los jugadores, con eso entro al objeto clientRooms[id_cliente] == sala
             var jugadores = Object.keys(clientRooms);
             jugadores.forEach(jugador => {
                 if (clientRooms[jugador] == roomName) {

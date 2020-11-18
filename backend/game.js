@@ -24,8 +24,6 @@ function createGameState() {
                 y: 0,
             },
             snake: [
-                { x: 1, y: 10 },
-                { x: 2, y: 10 },
                 { x: 3, y: 10 }
             ]
         }, {
@@ -38,9 +36,7 @@ function createGameState() {
                 y: 0,
             },
             snake: [
-                { x: 20, y: 10 },
-                { x: 19, y: 10 },
-                { x: 18, y: 10 }
+                { x: 10, y: 10 }
             ]
         }],
         food: {
@@ -50,20 +46,21 @@ function createGameState() {
         /*El tamaño de nuestro cuadrado*/
     };
 }
-
+/// Todo el juego en el servidor no multiplica la posicion por el tamaño manipula numeros pequeños y asi consigue mas velocidad
 function gameLoop(state) {
     if (!state) {
         return
     }
 
-    const playerOne = state.players[0];
-    const playerTwo = state.players[1];
+    var playerOne = state.players[0];
+    var playerTwo = state.players[1];
 
     playerOne.pos.x += playerOne.vel.x
     playerOne.pos.y += playerOne.vel.y
 
     playerTwo.pos.x += playerTwo.vel.x
     playerTwo.pos.y += playerTwo.vel.y
+    console.log("Posicion p1 ->", playerOne.pos);
 
     if (playerOne.pos.x < 0 || playerOne.pos.x > gridSize || playerOne.pos.y < 0 || playerOne.pos.y > gridSize) {
         return 2;
@@ -75,6 +72,7 @@ function gameLoop(state) {
 
     if (state.food.x == playerOne.pos.x && state.food.y == playerOne.pos.y) {
         playerOne.snake.push({...playerOne.pos });
+        console.log("Push del snake", playerOne.pos);
         playerOne.pos.x += playerOne.vel.x
         playerOne.pos.y += playerOne.vel.y
         randomFood(state);
@@ -89,17 +87,18 @@ function gameLoop(state) {
 
 
     if (playerOne.vel.x || playerOne.vel.y) {
-        for (let cell of playerOne.snake) {
+        for (let cell of playerTwo.snake) {
             if (cell.x == playerOne.pos.x && cell.y == playerOne.pos.y) {
                 return 2;
             }
         }
         playerOne.snake.push({...playerOne.pos });
         playerOne.snake.shift();
+        console.log("serpiente p1 ->", playerOne.snake);
     }
 
     if (playerTwo.vel.x || playerTwo.vel.y) {
-        for (let cell of playerTwo.snake) {
+        for (let cell of playerOne.snake) {
             if (cell.x == playerTwo.pos.x && cell.y == playerTwo.pos.y) {
                 return 1;
             }
@@ -107,7 +106,9 @@ function gameLoop(state) {
         playerTwo.snake.push({...playerTwo.pos });
         playerTwo.snake.shift();
     }
-
+    /*
+    console.log("Jugador 1->", playerOne.pos);
+    console.log("Jugador 2->", playerTwo.pos);*/
     return false;
 }
 

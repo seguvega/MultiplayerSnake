@@ -37,7 +37,6 @@
             <div id="gameScreen" class="h-100">
                 <div class="d-flex flex-column align-items-center justify-content-center h-100">
                     <h1>Your Game code is <span id="gameCodeDisplay"></span></h1>
-
                     <canvas id="canvas"></canvas>
                 </div>
             </div>
@@ -47,7 +46,10 @@
 <!--<script src='script.js'></script>-->
 <script>
     const bg_color = "Black";
-    const snake_color = "Green";
+    const snake_color = {
+        color1: "#7AFF33",
+        color2: "Green"
+    }
     const food_color = "Red";
 
     const socket = io();
@@ -96,7 +98,7 @@
         canvas = document.getElementById("canvas");
         ctx = canvas.getContext("2d");
 
-        canvas.width = canvas.height = 800;
+        canvas.width = canvas.height = 2000;
 
         ctx.fillStyle = bg_color;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -120,12 +122,11 @@
         const food = state.food;
         const gridsize = state.gridsize;
         const size = canvas.width / gridsize
-
         ctx.fillStyle = food_color;
         ctx.fillRect(food.x * size, food.y * size, size, size)
 
-        paintPlayer(state.players[0], size, snake_color);
-        paintPlayer(state.players[1], size, snake_color);
+        paintPlayer(state.players[0], size, snake_color.color1);
+        paintPlayer(state.players[1], size, snake_color.color2);
     }
 
     function paintPlayer(platerState, size, color) {
@@ -171,6 +172,7 @@
 
     function handleGameCode(gameCode) {
         gameCodeDisplay.innerText = gameCode;
+        alert(gameCode);
     }
 
     function handleUnknownGame() {
