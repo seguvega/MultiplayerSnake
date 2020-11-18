@@ -60,7 +60,7 @@ function gameLoop(state) {
 
     playerTwo.pos.x += playerTwo.vel.x
     playerTwo.pos.y += playerTwo.vel.y
-    console.log("Posicion p1 ->", playerOne.pos);
+        //console.log("Posicion p1 ->", playerOne.pos);
 
     if (playerOne.pos.x < 0 || playerOne.pos.x > gridSize || playerOne.pos.y < 0 || playerOne.pos.y > gridSize) {
         return 2;
@@ -94,7 +94,7 @@ function gameLoop(state) {
         }
         playerOne.snake.push({...playerOne.pos });
         playerOne.snake.shift();
-        console.log("serpiente p1 ->", playerOne.snake);
+        //console.log("serpiente p1 ->", playerOne.snake);
     }
 
     if (playerTwo.vel.x || playerTwo.vel.y) {
