@@ -98,7 +98,7 @@
 
         canvas = document.getElementById("canvas");
         ctx = canvas.getContext("2d");
-
+        canvas.style.overflow = "hidden" ///Para quitar los scrolls al canvas
         canvas.width = canvas.height = 2000;
 
         ctx.fillStyle = bg_color;
@@ -125,16 +125,18 @@
         const size = canvas.width / gridsize
         ctx.fillStyle = food_color;
         ctx.fillRect(food.x * size, food.y * size, size, size)
-        centerX = -(state.players[0].pos.x * size) + window.innerWidth / 2;
-        centerY = -(state.players[0].pos.y * size) + window.innerHeight / 2;
+        centerX = -(state.players[0].pos.x * size) + window.innerWidth / 2; ///Consigo la posicion en x de mi snake con respecto al tamaño de la ventana en x
+        centerY = -(state.players[0].pos.y * size) + window.innerHeight / 2; ///Consigo la posicion en y de mi snake con respecto al tamaño de la ventana en y
         console.log(centerX);
         console.log(centerY);
         paintPlayer(state.players[0], size, snake_color.color1);
         paintPlayer(state.players[1], size, snake_color.color2);
     }
 
-    function paintPlayer(platerState, size, color) {
-        const snake = platerState.snake;
+    function paintPlayer(playerState, size, color) {
+        const snake = playerState.snake;
+        canvas.style.marginLeft = centerX;
+        canvas.style.marginTop = centerY;
         ctx.fillStyle = color;
         for (let cell of snake) {
             ctx.fillRect(cell.x * size, cell.y * size, size, size)
