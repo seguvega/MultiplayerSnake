@@ -103,6 +103,9 @@
 
         ctx.fillStyle = bg_color;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = snake_color.color1;
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
         gameActive = true; //Variable inicia y finaliza el juego en la parte del cliente
         document.addEventListener("keydown", keydown);
@@ -129,9 +132,13 @@
         if (playerNumber == 1) {
             centerXP1 = -(state.players[0].pos.x * size) + window.innerWidth / 2; ///Consigo la posicion en x de mi snake con respecto al tamaño de la ventana en x
             centerYP1 = -(state.players[0].pos.y * size) + window.innerHeight / 2; ///Consigo la posicion en y de mi snake con respecto al tamaño de la ventana en y
+            canvas.style.marginLeft = centerXP1;
+            canvas.style.marginTop = centerYP1;
         } else if (playerNumber == 2) {
             centerXP2 = -(state.players[1].pos.x * size) + window.innerWidth / 2; ///Consigo la posicion en x de mi snake con respecto al tamaño de la ventana en x
             centerYP2 = -(state.players[1].pos.y * size) + window.innerHeight / 2; ///Consigo la posicion en y de mi snake con respecto al tamaño de la ventana en y
+            canvas.style.marginLeft = centerXP2;
+            canvas.style.marginTop = centerYP2;
         }
         /*
         console.log(centerX);
@@ -142,13 +149,6 @@
 
     function paintPlayer(playerState, size, color) {
         const snake = playerState.snake;
-        if (playerNumber == 1) {
-            canvas.style.marginLeft = centerXP1;
-            canvas.style.marginTop = centerYP1;
-        } else if (playerNumber == 2) {
-            canvas.style.marginLeft = centerXP2;
-            canvas.style.marginTop = centerYP2;
-        }
         ctx.fillStyle = color;
         for (let cell of snake) {
             ctx.fillRect(cell.x * size, cell.y * size, size, size)
