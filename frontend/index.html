@@ -88,6 +88,7 @@
     let canvas, ctx;
     let playerNumber;
     let gameActive = false;
+    let centerX, centerY;
 
     function init() {
         //Aparece la pantalla del juego y desaparece la del inicio
@@ -124,7 +125,10 @@
         const size = canvas.width / gridsize
         ctx.fillStyle = food_color;
         ctx.fillRect(food.x * size, food.y * size, size, size)
-
+        centerX = -(state.players[0].pos.x * size) + window.innerWidth / 2;
+        centerY = -(state.players[0].pos.y * size) + window.innerHeight / 2;
+        console.log(centerX);
+        console.log(centerY);
         paintPlayer(state.players[0], size, snake_color.color1);
         paintPlayer(state.players[1], size, snake_color.color2);
     }
