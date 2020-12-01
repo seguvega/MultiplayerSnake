@@ -62,13 +62,13 @@ function gameLoop(state) {
     playerTwo.pos.y += playerTwo.vel.y
         //console.log("Posicion p1 ->", playerOne.pos);
 
-    if (playerOne.pos.x < 0 || playerOne.pos.x > gridSize || playerOne.pos.y < 0 || playerOne.pos.y > gridSize) {
+    /*if (playerOne.pos.x < 0 || playerOne.pos.x > gridSize || playerOne.pos.y < 0 || playerOne.pos.y > gridSize) {
         return 2;
     }
 
     if (playerTwo.pos.x < 0 || playerTwo.pos.x > gridSize || playerTwo.pos.y < 0 || playerTwo.pos.y > gridSize) {
         return 1;
-    }
+    }*/
 
     if (state.food.x == playerOne.pos.x && state.food.y == playerOne.pos.y) {
         playerOne.snake.push({...playerOne.pos });
